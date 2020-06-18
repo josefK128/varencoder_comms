@@ -26,6 +26,8 @@ import msg2sentences as msg2s
 import subst_synonyms as synonyms
 
 
+#nltk.download()
+
 
 # determine maxsubs
 if len(sys.argv) > 2:
@@ -85,6 +87,7 @@ def action(diagnostics:bool=False) -> None:
 
             # prepare json-container data_ for new email with the same content 
             # as the ingested json-container data, but altered msg
+            print("data['sender'] = " + data['sender'])
             data_['sender'] = data['sender'] or ''
             data_['receivers'] = data['receivers'] or [] 
             data_['sent'] = data['sent'] or ''
