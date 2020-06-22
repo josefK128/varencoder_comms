@@ -35,7 +35,7 @@ for filename in os.listdir(directory):
             for row in fcsv:
                 data:Dict = {}
                 msg:str
-                #print('row = ' + str(row))
+                print('i = ' + str(i) + '  row = ' + str(row))
                 msg = row['tweet']
                 filename_ = filename.replace('.csv', str(i) + '.json')
                 i += 1
