@@ -20,15 +20,23 @@ data:Dict = {}
 receivers:List[str] = []
 msg = ""
 mail_regex = '^[A-Za-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-directory = 'w3c-emails_db/' + thread
-directory_ = '../db/' + thread
+emailpath = 'w3c-emails_db/' + thread
+dbpath = '../db/' + thread
 
 
-# parse files in thread
-for filename in os.listdir(directory):
-    filepath = os.path.join(directory, filename)
+#create directory at dbpath if needed
+if not os.path.exists(dbpath):
+    mode = 0o777
+    os.mkdir(dbpath, mode)
+    #open(pdfgenpath, 'w').close()
+    print(f'created directory {dbpath}')
+
+
+# parse files in thread - filepath is path in email/  filepath_ is path in db/
+for filename in os.listdir(emailpath):
+    filepath = os.path.join(emailpath, filename)
     filename_ = filename.replace('.txt', '.json')
-    filepath_ = os.path.join(directory_, filename_)
+    filepath_ = os.path.join(dbpath, filename_)
     print('---------------------------------------------------')
     print('filepath = ' + filepath)
     print('filepath_ = ' + filepath_)
@@ -72,6 +80,7 @@ for filename in os.listdir(directory):
         print('\ndata = ')
         #[print(key, value) for key, value in data.items()]
         print(data_json)
+
 
         # write data as json to db_
         with open(filepath_, 'w+') as f:

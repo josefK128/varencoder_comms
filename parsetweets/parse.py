@@ -1,4 +1,4 @@
-# parse.py - tweets
+# parse.py - parsetweets/csv_db/tweetsK -> db/tweetsK
 
 import os
 import sys
@@ -17,14 +17,23 @@ print('thread = ' + thread)
 
 
 # vars
-directory = 'csv_db/' + thread
-directory_ = '../db/' + thread
+dbpath = 'csv_db/' + thread
+tweetspath = '../db/' + thread
+
+
+#create directory at dbpath if needed
+if not os.path.exists(dbpath):
+    mode = 0o777
+    os.mkdir(dbpath, mode)
+    #open(pdfgenpath, 'w').close()
+    print(f'created directory {dbpath}')
 
 
 # parse files in thread
-for filename in os.listdir(directory):
+# filepath is path in parsetweets/csv_db; filepath_ is path in ../db
+for filename in os.listdir(dbpath):
     if filename.endswith('.csv'):
-        filepath = os.path.join(directory, filename)
+        filepath = os.path.join(dbpath, filename)
         print('---------------------------------------------------')
         print('filepath = ' + filepath)
     
@@ -39,7 +48,7 @@ for filename in os.listdir(directory):
                 msg = row['tweet']
                 filename_ = filename.replace('.csv', str(i) + '.json')
                 i += 1
-                filepath_ = os.path.join(directory_, filename_)
+                filepath_ = os.path.join(tweetspath, filename_)
                 data['msg'] = msg
                 data['sender'] = ''
                 data['receivers'] = []

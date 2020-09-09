@@ -15,8 +15,7 @@
 # document-term matrix A
 
 
-import os.path
-from os import path
+import os
 import time
 import nltk
 import sys
@@ -34,7 +33,7 @@ if len(sys.argv) > 2:
     maxsubs:int = int(sys.argv[2])
     thread:str = sys.argv[1]
 else:
-    maxsubs = 3
+    maxsubs = 5
 
     # determine thread
     if len(sys.argv) > 1:
@@ -48,19 +47,30 @@ print('thread = ' + thread)
 
 
 # vars
-directory = './db/' + thread
-directory_ = './db_/' + thread
+dbpath = './db/' + thread
+dbpath_ = './db_/' + thread
+
+
+#create directory at dbpath_ if needed
+if not os.path.exists(dbpath_):
+    mode = 0o777
+    os.mkdir(dbpath_, mode)
+    #open(dbpath_, 'w').close()
+    print(f'created directory {dbpath_}')
 
 
 
 def action(diagnostics:bool=False) -> None:
-    for filename in os.listdir(directory):
+    for filename in os.listdir(dbpath):
         if filename.endswith('.json'):
-            filepath = os.path.join(directory, filename)
-            filepath_ = os.path.join(directory_, filename)
+            filepath = os.path.join(dbpath, filename)
+            filepath_ = os.path.join(dbpath_, filename)
             print('---------------------------------------------------')
             print('filepath = ' + filepath)
             print('filepath_ = ' + filepath_)
+
+            # make target db_ file (if needed)
+            os.makedirs(os.path.dirname(filepath_), exist_ok=True)
     
             # parse email file
             with open(filepath, 'r') as f:

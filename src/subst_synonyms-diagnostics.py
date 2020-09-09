@@ -99,10 +99,10 @@ def replace(sa:List[str], maxsubs:int) -> Tuple[List[str], List[List[str]]]:
                 synonyms = find_synonyms(word)
 
                 #diagnostics
-                #print('\nsubst_synonyms[A]: synonyms of ' + word + ' = ' + str(synonyms))
-                #print(f'subst_synonyms.replace [A]: sa_ = {sa_}')
-                #print(f'subst_synonyms.replace: words_ = {words_}')
-                #print(f'subst_synonyms.replace: len(synonyms) = {len(synonyms)}')
+                print('\nsubst_synonyms[A]: synonyms of ' + word + ' = ' + str(synonyms))
+                print(f'subst_synonyms.replace [A]: sa_ = {sa_}')
+                print(f'subst_synonyms.replace: words_ = {words_}')
+                print(f'subst_synonyms.replace: len(synonyms) = {len(synonyms)}')
 
 
                 if len(synonyms) > 0:
@@ -114,7 +114,7 @@ def replace(sa:List[str], maxsubs:int) -> Tuple[List[str], List[List[str]]]:
                     words_[i].append(word)
 
                     #diagnostics
-                    #print(f'subst_synonyms[B{i}]: sa_[{i}] = {sa_[i]}')
+                    print(f'subst_synonyms[B{i}]: sa_[{i}] = {sa_[i]}')
                     print(f'subst_synonyms.replace: words_[{i}] = {words_[i]}')
 
 
